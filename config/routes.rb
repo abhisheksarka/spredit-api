@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   api_routes = lambda do
     resource :init, :only => [:show]
+    resources :sessions, :only => [:create, :destroy]
   end
   
   namespace :api do

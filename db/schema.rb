@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123181847) do
+ActiveRecord::Schema.define(version: 20141201172047) do
+
+  create_table "jw_tokens", force: true do |t|
+    t.string   "value"
+    t.string   "ip_address"
+    t.integer  "jw_tokenable_id"
+    t.string   "jw_tokenable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "expires_at"
+  end
+
+  add_index "jw_tokens", ["jw_tokenable_id", "jw_tokenable_type"], name: "index_jw_tokens_on_jw_tokenable_id_and_jw_tokenable_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider"

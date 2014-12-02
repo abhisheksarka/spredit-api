@@ -19,6 +19,12 @@ module JwtAuthHelper
 
   # sign in a user/authable object, returns a json web token object
   def jwt_sign_in(jwt_authable)
+    # expire every other token
+    jwt_authable.jw_tokens.update_all({
+      :expires_at => Time.now
+    })
+    
+    # create a new one
     jwt_authable.jw_tokens.create({
       :value => encode(jwt_authable.id),
       :ip_address => request.ip,

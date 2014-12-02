@@ -45,8 +45,6 @@ module JwtAuthHelper
     @current_jw_token
   end
 
-  private 
-
   def encode(jwt_authable_id)
     JWT.encode({ :id => jwt_authable_id }, ENV['JWT_SALT'])
   end
@@ -76,9 +74,11 @@ module JwtAuthHelper
   end
 
   def set_jw_token_and_jwt_authable
-    current_jw_token = JwToken.find_by(:value => params[:token])
+    self.current_jw_token = JwToken.find_by(:value => params[:token])
     if current_jw_token_valid?
-      current_jwt_authable = JwToken.find_by(:jw_tokenable_id => decoded_jwt_authable_hash[:id]).jw_tokenable
+      self.current_jwt_authable = JwToken.find_by(:jw_tokenable_id => decoded_jwt_authable_hash[:id]).jw_tokenable
+    else
+      self.current_jwt_authable = nil
     end
   end
 

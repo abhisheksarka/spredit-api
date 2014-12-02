@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201172047) do
+ActiveRecord::Schema.define(version: 20141201173052) do
 
   create_table "jw_tokens", force: true do |t|
     t.string   "value"

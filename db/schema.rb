@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201173052) do
+ActiveRecord::Schema.define(version: 20141225134454) do
+
+  create_table "conversations", force: true do |t|
+    t.string   "title"
+    t.integer  "conversable_id"
+    t.string   "conversable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "conversations", ["conversable_id", "conversable_type"], name: "index_conversations_on_conversable_id_and_conversable_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|
     t.string   "value"

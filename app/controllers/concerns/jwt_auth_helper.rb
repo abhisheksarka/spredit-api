@@ -25,11 +25,14 @@ module JwtAuthHelper
     })
     
     # create a new one
-    jwt_authable.jw_tokens.create({
-      :value => encode(jwt_authable.id),
+    new_token = jwt_authable.jw_tokens.create({
       :ip_address => request.ip,
       :expires_at => Time.now + JwToken.timeout
     })
+    new_token.update({
+      :value => encode(new_token)
+    })
+    new_token
   end
 
   # should be called only after authentication happens, returns the authable
@@ -51,8 +54,8 @@ module JwtAuthHelper
     @current_jw_token
   end
 
-  def encode(jwt_authable_id)
-    JWT.encode({ :id => jwt_authable_id }, ENV['JWT_SALT'])
+  def encode(jw_token)
+    JWT.encode({ :id => jw_token.jw_tokenable_id, :created_at => jw_token.created_at }, ENV['JWT_SALT'])
   end
 
   def decode
@@ -79,8 +82,12 @@ module JwtAuthHelper
     current_jw_token.present? and !current_jw_token.expired?
   end
 
+  def token_value_sent
+    request.headers['Jw-Token']
+  end
+
   def set_jw_token_and_jwt_authable
-    self.current_jw_token = JwToken.find_by(:value => params[:token])
+    self.current_jw_token = JwToken.find_by(:value => token_value_sent)
     if current_jw_token_valid?
       self.current_jwt_authable = JwToken.find_by(:jw_tokenable_id => decoded_jwt_authable_hash[:id]).jw_tokenable
     else

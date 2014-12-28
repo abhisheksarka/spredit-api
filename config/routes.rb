@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resource :init, :only => [:show]
     resources :sessions, :only => [:create, :destroy, :validate]
     resources :conversations, :only => [:create] do
-      get 'categories', :on => :collection
+      collection do
+        resources :categories, :only => [:index]
+      end
     end
   end
   

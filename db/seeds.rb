@@ -29,7 +29,7 @@ categories = [
   {:name => 'Business and Finance', :grouping => 'Serious'},
   {:name => 'Books and Literature', :grouping => 'Serious'},
 
-  {:name => 'Event', :grouping => 'live'}
+  {:name => 'Event', :grouping => 'Live'}
 ]
 
 info "categories"

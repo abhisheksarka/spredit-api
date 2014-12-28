@@ -2,17 +2,13 @@ class Api::V1::ConversationsController < Api::V1::ApplicationController
   before_filter :authenticate_token! 
 
   def create
-    # serializer_responder jwt_sign_in(User.login_via_fb(log_in_params)), SessionSerializer
+    serializer_responder Conversation.create(conversation_params), ConversationSerializer
   end
 
-  def categories
-    render :json => Conversation.categories
-  end
-  
   private
 
-  def log_in_params
-    params.permit(:accessToken, :expiresIn, :userID, :signedRequest)
+  def conversation_params
+    params.require(:conversation).permit(:title, :category_id)
   end
   
 end

@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20141228061853) do
     t.string   "conversable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "categories_id"
+    t.integer  "category_id"
   end
 
-  add_index "conversations", ["categories_id"], name: "index_conversations_on_categories_id", using: :btree
+  add_index "conversations", ["category_id"], name: "index_conversations_on_category_id", using: :btree
   add_index "conversations", ["conversable_id", "conversable_type"], name: "index_conversations_on_conversable_id_and_conversable_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|

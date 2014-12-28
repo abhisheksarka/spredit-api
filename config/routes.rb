@@ -1,17 +1,11 @@
 Rails.application.routes.draw do
 
   api_routes = lambda do
-    resource :init, :only => [
-      :show
-    ]
-    resources :sessions, :only => [
-      :create, 
-      :destroy, 
-      :validate
-    ]
-    resources :conversations, :only => [
-      :create
-    ]
+    resource :init, :only => [:show]
+    resources :sessions, :only => [:create, :destroy, :validate]
+    resources :conversations, :only => [:create] do
+      get 'categories', :on => :collection
+    end
   end
   
   namespace :api do

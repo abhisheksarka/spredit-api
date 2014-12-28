@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225134454) do
+ActiveRecord::Schema.define(version: 20141228061853) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.string   "grouping"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "conversations", force: true do |t|
     t.string   "title"
@@ -19,8 +26,10 @@ ActiveRecord::Schema.define(version: 20141225134454) do
     t.string   "conversable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "categories_id"
   end
 
+  add_index "conversations", ["categories_id"], name: "index_conversations_on_categories_id", using: :btree
   add_index "conversations", ["conversable_id", "conversable_type"], name: "index_conversations_on_conversable_id_and_conversable_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|

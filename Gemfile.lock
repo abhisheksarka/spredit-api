@@ -70,6 +70,7 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    geocoder (1.2.3)
     haml (4.0.5)
       tilt
     hashie (3.2.0)
@@ -219,6 +220,7 @@ DEPENDENCIES
   factory_girl (= 4.0)
   factory_girl_rails (= 4.0)
   figaro
+  geocoder
   jbuilder (~> 2.0)
   koala (~> 1.10.0rc)
   mysql2

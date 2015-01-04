@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228061853) do
+ActiveRecord::Schema.define(version: 20150104123608) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20141228061853) do
   end
 
   add_index "jw_tokens", ["jw_tokenable_id", "jw_tokenable_type"], name: "index_jw_tokens_on_jw_tokenable_id_and_jw_tokenable_type", using: :btree
+
+  create_table "locations", force: true do |t|
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.float    "latitude",       limit: 24
+    t.float    "longitude",      limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider"

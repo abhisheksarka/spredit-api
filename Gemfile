@@ -27,6 +27,7 @@ gem 'devise'
 gem "figaro"
 gem 'omniauth-facebook'
 gem "koala", "~> 1.10.0rc"
+gem 'geocoder'
 
 
 group :test, :development do

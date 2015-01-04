@@ -5,5 +5,5 @@ class UserSerializer < BaseSerializer
              :uid,
              :email,
              :gender
-  has_one :last_location
+  has_one :location
 end

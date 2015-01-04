@@ -3,11 +3,6 @@ Rails.application.routes.draw do
   api_routes = lambda do
     resource :init, :only => [:show]
     resources :sessions, :only => [:create, :destroy, :validate]
-    resources :conversations, :only => [:create] do
-      collection do
-        resources :categories, :only => [:index]
-      end
-    end
   end
   
   namespace :api do

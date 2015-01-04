@@ -4,6 +4,7 @@ class UserSerializer < BaseSerializer
              :name,
              :uid,
              :email,
-             :gender
+             :gender,
+             :profile_picture
   has_one :location
 end

@@ -18,7 +18,8 @@ module FbAuthable
           :name => me['name'],
           :email => me['email'],
           :uid => me['id'],
-          :gender => me['gender']
+          :gender => me['gender'],
+          :profile_picture => "https://graph.facebook.com/#{me['id']}/picture"
         })
       end
       entity.update({:oauth_token => access_token})

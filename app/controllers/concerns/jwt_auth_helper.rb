@@ -6,7 +6,7 @@ module JwtAuthHelper
   end
 
   # authenticates and sets all the values so that the controller can use it
-  def authenticate_token!
+  def authenticate_token
     set_jw_token_and_jwt_authable
     if current_jwt_authable.present?
       current_jw_token.update({

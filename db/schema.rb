@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104181711) do
+ActiveRecord::Schema.define(version: 20150106160831) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
     t.string   "grouping"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "configuration_locations", force: true do |t|
+    t.integer  "configurable_location_id"
+    t.string   "configurable_location_type"
+    t.float    "radius",                     limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end

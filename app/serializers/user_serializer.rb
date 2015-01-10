@@ -7,4 +7,5 @@ class UserSerializer < BaseSerializer
              :gender,
              :profile_picture
   has_one :location
+  has_one :location_configuration
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106160831) do
+ActiveRecord::Schema.define(version: 20150110132326) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(version: 20150106160831) do
   end
 
   add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
+
+  create_table "posts", force: true do |t|
+    t.integer  "postable_id"
+    t.string   "postable_type"
+    t.integer  "post_publishable_id"
+    t.string   "post_publishable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["post_publishable_id", "post_publishable_type"], name: "index_posts_on_post_publishable_id_and_post_publishable_type", using: :btree
+  add_index "posts", ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider"

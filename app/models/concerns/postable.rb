@@ -1,11 +1,10 @@
-module JwtAuthable
+module Postable
   extend ActiveSupport::Concern
 
   included do
-    has_many :jw_tokens, as: :jw_tokenable
+    has_one :post, as: :postable
   end
 
   module ClassMethods
-    
   end
 end

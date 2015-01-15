@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111062117) do
+ActiveRecord::Schema.define(version: 20150115132656) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -81,6 +81,19 @@ ActiveRecord::Schema.define(version: 20150111062117) do
 
   add_index "posts", ["post_publishable_id", "post_publishable_type"], name: "index_posts_on_post_publishable_id_and_post_publishable_type", using: :btree
   add_index "posts", ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type", using: :btree
+
+  create_table "spreads", force: true do |t|
+    t.integer  "spreadable_id"
+    t.string   "spreadable_type"
+    t.integer  "spread_publishable_id"
+    t.string   "spread_publishable_type"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spreads", ["spread_publishable_id", "spread_publishable_type"], name: "index_spreads_on_spread_publishable_id_and_type", using: :btree
+  add_index "spreads", ["spreadable_id", "spreadable_type"], name: "index_spreads_on_spreadable_id_and_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider"

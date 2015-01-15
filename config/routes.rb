@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create, :destroy, :validate]
     resources :locations, only: [:create, :update]
     resources :posts, only: [:create]
+    resources :spreads, only: [:create, :index]
     namespace :configuration do
       resources :locations, only: [:update]
     end

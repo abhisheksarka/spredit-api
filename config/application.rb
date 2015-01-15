@@ -21,5 +21,6 @@ module MaskdApi
     # config.i18n.default_locale = :de
     config.autoload_paths += %W(#{Rails.root}/app/serializers)
     config.autoload_paths += %W(#{Rails.root}/app/services)
+    config.autoload_paths += %W(#{Rails.root}/app/queries)
   end
 end

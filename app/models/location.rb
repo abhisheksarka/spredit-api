@@ -6,4 +6,10 @@ class Location < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode, if: (:longitude_changed? or :latitude_changed?)
+
+  class << self
+    def in_miles(km)
+      km * 0.621371
+    end
+  end
 end

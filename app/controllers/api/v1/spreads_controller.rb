@@ -3,11 +3,11 @@ class Api::V1::SpreadsController < Api::V1::ApplicationController
   before_filter :load_resource, only: [:update, :destroy]
   
   def create
-    serializer_responder SpreadService.new(current_jwt_authable, spread_params).create 
+    serializer_responder SpreadService.new(current_jwt_authable).create(spread_params) 
   end
 
   def index
-    serializer_responder Spread.all, nil, SpreadSerializer
+    serializer_responder SpreadService.new(current_jwt_authable).query, nil, SpreadSerializer
   end
 
   private

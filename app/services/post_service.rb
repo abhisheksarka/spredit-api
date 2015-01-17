@@ -32,7 +32,7 @@ class PostService
   private
 
   def spread(post)
-    SpreadService.new(post_publishable, spread_params(post)).create
+    SpreadService.new(post_publishable).create(spread_params(post))
   end
 
   def spread_params(post)

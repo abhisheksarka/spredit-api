@@ -1,4 +1,4 @@
-class UserSerializer < BaseSerializer
+class UserDetailsSerializer < BaseSerializer
   attributes :id, 
              :provider, 
              :name,
@@ -6,4 +6,6 @@ class UserSerializer < BaseSerializer
              :email,
              :gender,
              :profile_picture
+  has_one :location
+  has_one :location_configuration
 end

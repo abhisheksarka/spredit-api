@@ -16,8 +16,7 @@ class SpreadService
       .joins("INNER JOIN posts ON (spreads.spreadable_id = posts.id AND spreads.spreadable_type = 'Post')")
       .joins("INNER JOIN locations ON (posts.id = locations.locatable_id AND locations.locatable_type = 'Post')")
       .where('locations.id' => nearby_locations)
-      .load_spreadable([:postable, :location])
-      .load_spread_publishable
+      .load_spreadable([:postable, :location, :post_publishable])
   end
 
 end

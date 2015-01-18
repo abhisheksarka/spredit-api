@@ -2,6 +2,10 @@ class Api::V1::LocationsController < Api::V1::ApplicationController
   before_filter :authenticate_token
   before_filter :load_resource, only: [:update]
   
+  def index
+    serializer_responder Location.where(locatable_id: params[:locatable_id], locatable_type: params[:locatable_type])
+  end
+
   def create
     serializer_responder Location.create(location_params)
   end

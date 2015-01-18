@@ -4,7 +4,6 @@ module Propagatable
   included do
     has_one :propagation, as: :propagatable
     before_create :pr_set_default_propagation
-    before_create :pr_set_initial_location
   end
 
   def derived_location
@@ -15,10 +14,6 @@ module Propagatable
 
   def pr_set_default_propagation
     self.build_propagation(total: 0)
-  end
-
-  def pr_set_initial_location
-    propagation.locations.build(derived_location.attributes.symbolize_keys.slice(:latitude, :longitude, :address))
   end
 
   def pr_location_through_association

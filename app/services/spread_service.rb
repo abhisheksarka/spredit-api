@@ -27,10 +27,13 @@ class SpreadService
 
   private
 
+  # update propgation for the entity that has been spread
+  # based on the entity spreading it
+  
   def update_propagation(spread)
     spreadable = spread.spreadable
     spread_publishable = spread.spread_publishable
-    
+
     propagation = spreadable.propagation
     locations = propagation.locations
 

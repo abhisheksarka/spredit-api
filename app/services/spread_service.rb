@@ -14,9 +14,10 @@ class SpreadService
     SpreadQuery.new
       .spreads
       .joins("INNER JOIN posts ON (spreads.spreadable_id = posts.id AND spreads.spreadable_type = 'Post')")
-      .joins("INNER JOIN locations ON (posts.id = locations.locatable_id AND locations.locatable_type = 'Post')")
+      .joins("INNER JOIN propagations ON (posts.id = propagations.propagatable_id AND propagations.propagatable_type = 'Post')")
+      .joins("INNER JOIN locations ON (propagations.id = locations.locatable_id AND locations.locatable_type = 'Propagation')")
       .where('locations.id' => nearby_locations)
-      .load_spreadable([:postable, :location, :post_publishable])
+      .load_spreadable([:postable, :post_publishable, propagation: :locations])
 
       
       # .where.not('spreads.spread_publishable_id' => user.id)

@@ -5,5 +5,7 @@ class PostSerializer < BaseSerializer
              :post_publishable_id,
              :post_publishable_type,
              :created_at
-  has_one :postable, :post_publishable
+  has_one :postable, 
+          :post_publishable, 
+          :propagation
 end

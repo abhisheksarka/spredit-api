@@ -7,7 +7,7 @@ class SpreadService
 
   def create(spreadable_params)
     s = user.spreads.create(spreadable_params)
-    update_propagation(s)
+    update_propagation(s) if s.valid?
     s.reload
   end
 
@@ -20,16 +20,14 @@ class SpreadService
       .joins("INNER JOIN locations ON (propagations.id = locations.locatable_id AND locations.locatable_type = 'Propagation')")
       .where('locations.id' => nearby_locations)
       .load_spreadable([:postable, :post_publishable, propagation: :locations])
-
-      
-      # .where.not('spreads.spread_publishable_id' => user.id)
+      .where.not('posts.post_publishable_id' => user.id)
   end
 
   private
 
   # update propgation for the entity that has been spread
   # based on the entity spreading it
-  
+
   def update_propagation(spread)
     spreadable = spread.spreadable
     spread_publishable = spread.spread_publishable

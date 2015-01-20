@@ -25,8 +25,7 @@ class SpreadService
           "(posts.post_publishable_id != " + user.id.to_s + " AND posts.post_publishable_type = 'User')" +
         ")"
       )
-      .joins( 
-        "INNER JOIN propagations ON " +
+      .joins("INNER JOIN propagations ON " +
         "(" + 
           "(posts.id = propagations.propagatable_id AND propagations.propagatable_type = 'Post')" +
         ")"

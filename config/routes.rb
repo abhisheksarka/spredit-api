@@ -4,9 +4,8 @@ Rails.application.routes.draw do
     resource :init, only: [:show]
     resources :sessions, only: [:create, :destroy, :validate]
     resources :locations, only: [:create, :update, :index]
-    
+    resources :comments, only: [:index, :create]
     resources :posts, only: [:create]
-
     resources :spreads, only: [:create, :index]
     namespace :configuration do
       resources :locations, only: [:update]

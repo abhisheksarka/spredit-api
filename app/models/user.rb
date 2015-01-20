@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   include PostPublishable
   include SpreadPublishable
+  include CommentPublishable
 end

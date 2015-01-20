@@ -3,9 +3,10 @@ class Location < ActiveRecord::Base
 
   validates :longitude, presence: true
   validates :latitude, presence: true
-
+  validates :address, presence: true
+  
   reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode, if: (:longitude_changed? or :latitude_changed?)
+  before_validation :reverse_geocode, if: (:longitude_changed? or :latitude_changed?)
 
   class << self
     def in_miles(km)

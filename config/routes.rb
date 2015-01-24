@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :locations, only: [:create, :update, :index]
     resources :comments, only: [:index, :create]
     resources :posts, only: [:create]
-    resources :spreads, only: [:create, :index]
+    resources :spreads, only: [:create, :index] do
+      collection do
+        get :publishers
+      end
+    end
     namespace :configuration do
       resources :locations, only: [:update]
     end

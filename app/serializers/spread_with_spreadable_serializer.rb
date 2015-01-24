@@ -1,4 +1,4 @@
-class SpreadSerializer < BaseSerializer
+class SpreadWithSpreadableSerializer < BaseSerializer
   attributes :id, 
              :action,
              :spreadable_id,

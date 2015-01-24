@@ -7,14 +7,18 @@ class Api::V1::SpreadsController < Api::V1::ApplicationController
   end
 
   def index
-    serializer_responder SpreadService.new(current_jwt_authable).query, nil, SpreadSerializer
+    serializer_responder SpreadService.new(current_jwt_authable).query, nil, SpreadWithSpreadableSerializer
+  end
+
+  def publishers
+    serializer_responder Spread.includes(:spread_publishable).where(spreadable_id: params[:spreadable_id], spreadable_type: params[:spreadable_type]), nil, SpreadWithSpreadPublishableSerializer
   end
 
   private
 
   def load_resource
     @spread = Spread.find(params[:id])
-  end
+  end 
 
   def spread_params
     params.require(:spread).permit(:spreadable_type, :spreadable_id, :action)

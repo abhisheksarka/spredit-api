@@ -6,6 +6,10 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
     serializer_responder CommentService.new(current_jwt_authable).create(comment_params)
   end
 
+  def index
+    serializer_responder Comment.where(commentable_id: params[:commentable_id], commentable_type: params[:commentable_type]), nil, CommentSerializer
+  end
+
   private
 
   def load_resource

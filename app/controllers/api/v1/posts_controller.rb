@@ -2,8 +2,12 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   before_filter :authenticate_token
   before_filter :load_resource, only: [:update]
   
+  def index
+    serializer_responder PostService.new(current_jwt_authable).query, nil, PostSerializer
+  end
+
   def create
-    serializer_responder PostService.new(current_jwt_authable, post_params, postable_params).create 
+    serializer_responder PostService.new(current_jwt_authable).create(post_params, postable_params) 
   end
 
   def update

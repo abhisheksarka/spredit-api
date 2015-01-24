@@ -4,14 +4,14 @@ class PostService
                 :post_publishable,
                 :post
 
-  def initialize(post_publishable, post_params, postable_params, auto_spread=true)
+  def initialize(post_publishable)
     @post_publishable = post_publishable
-    @post_params = post_params
-    @postable_params = postable_params
-    @auto_spread = auto_spread
   end
 
-  def create
+  def create(post_params, postable_params, auto_spread=true)
+    @post_params = post_params
+    @postable_params = postable_params
+
     # create the entities
     postable = new_postable
     post = new_post
@@ -24,9 +24,14 @@ class PostService
     post.save
     
     # create the spread object
-    spread(post) if @auto_spread and post.valid?
+    spread(post) if auto_spread and post.valid?
 
     post.reload
+  end
+
+  def query
+    Post.includes(:postable, :post_publishable, propagation: :locations)
+    .where(id: SpreadService.new(post_publishable).query.map(&:spreadable_id)).uniq
   end
 
   private

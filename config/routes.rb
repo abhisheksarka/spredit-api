@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get :publishers
       end
     end
+    resources :views, only: [:create]
     namespace :configuration do
       resources :locations, only: [:update]
     end

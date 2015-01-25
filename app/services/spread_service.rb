@@ -21,7 +21,7 @@ class SpreadService
       .spreads
       .joins("INNER JOIN posts ON " + 
         "(" +
-          "(spreads.spreadable_id = posts.id AND spreads.spreadable_type = 'Post') AND " +
+          "(spreads.spreadable_id = posts.id AND spreads.spreadable_type = 'Post' AND spreads.action = 'spread') AND " +
           "(posts.post_publishable_id != " + user.id.to_s + " AND posts.post_publishable_type = 'User')" +
         ")"
       )

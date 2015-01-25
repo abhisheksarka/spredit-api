@@ -30,7 +30,7 @@ class PostService
   end
 
   def query
-    Post.includes(:postable, :post_publishable, propagation: :locations)
+    Post.includes(:postable, :post_publishable, :views, :spreads, :contains, propagation: :locations)
     .where(id: SpreadService.new(post_publishable).query.map(&:spreadable_id)).uniq
   end
 

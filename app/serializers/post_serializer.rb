@@ -7,7 +7,10 @@ class PostSerializer < BaseSerializer
              :created_at,
              :comments_count,
              :spreads_count,
-             :total_propagation
+             :contains_count,
+             :total_propagation,
+             :view_count,
+             :contains_count
 
   has_one :postable, 
           :post_publishable, 
@@ -21,7 +24,15 @@ class PostSerializer < BaseSerializer
     object.spreads.count
   end
 
+  def contains_count
+    object.contains.count
+  end
+
   def total_propagation
     object.propagation.total.round(1) rescue 0
+  end
+
+  def view_count
+    object.views.count
   end
 end

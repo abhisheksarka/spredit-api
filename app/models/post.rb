@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  include Viewable
   include Spreadable
   include Commentable
   include Propagatable

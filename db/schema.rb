@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120173245) do
+ActiveRecord::Schema.define(version: 20150125070330) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -129,5 +129,17 @@ ActiveRecord::Schema.define(version: 20150120173245) do
     t.string   "gender"
     t.string   "profile_picture"
   end
+
+  create_table "views", force: true do |t|
+    t.integer  "viewable_id"
+    t.string   "viewable_type"
+    t.integer  "view_publishable_id"
+    t.string   "view_publishable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "views", ["view_publishable_id", "view_publishable_type"], name: "index_views_on_view_publishable_id_and_view_publishable_type", using: :btree
+  add_index "views", ["viewable_id", "viewable_type"], name: "index_views_on_viewable_id_and_viewable_type", using: :btree
 
 end

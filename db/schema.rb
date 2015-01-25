@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125131856) do
-
-  create_table "categories", force: true do |t|
-    t.string   "name"
-    t.string   "grouping"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20150125175844) do
 
   create_table "comments", force: true do |t|
     t.integer  "commentable_id"
@@ -39,18 +32,6 @@ ActiveRecord::Schema.define(version: 20150125131856) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "conversations", force: true do |t|
-    t.string   "title"
-    t.integer  "conversable_id"
-    t.string   "conversable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "category_id"
-  end
-
-  add_index "conversations", ["category_id"], name: "index_conversations_on_category_id", using: :btree
-  add_index "conversations", ["conversable_id", "conversable_type"], name: "index_conversations_on_conversable_id_and_conversable_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|
     t.string   "value"
@@ -77,14 +58,12 @@ ActiveRecord::Schema.define(version: 20150125131856) do
   add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
 
   create_table "post_photos", force: true do |t|
-    t.string   "content"
     t.string   "photo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "post_texts", force: true do |t|
-    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -96,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150125131856) do
     t.string   "post_publishable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "content"
   end
 
   add_index "posts", ["post_publishable_id", "post_publishable_type"], name: "index_posts_on_post_publishable_id_and_post_publishable_type", using: :btree

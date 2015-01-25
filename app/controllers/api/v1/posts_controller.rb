@@ -23,11 +23,11 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:postable_type)
+    params.require(:post).permit(:postable_type, :content)
   end
 
   def postable_params
-    params.require(:postable).permit(:content, :photo)
+    params.require(:postable).permit(:photo)
   end
   
 end

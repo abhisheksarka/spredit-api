@@ -10,7 +10,8 @@ class PostSerializer < BaseSerializer
              :contains_count,
              :total_propagation,
              :view_count,
-             :contains_count
+             :contains_count,
+             :content
 
   has_one :postable, 
           :post_publishable, 

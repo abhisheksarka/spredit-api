@@ -8,25 +8,19 @@ class PostService
     @post_publishable = post_publishable
   end
 
-  def create(post_params, postable_params, auto_spread=true)
+  def create(post_params, auto_spread=true)
     @post_params = post_params
-    @postable_params = postable_params
+    
+    if is_postable_associated_to_an_existing_post?
+      post = Post.new
+      post.errors[:post] << "already associated to a postable"
+      post
+    end
 
-    # create the entities
-    postable = new_postable
-    post = new_post
-    
-    # create associations
-    post.postable = postable
-    post.post_publishable = post_publishable
-    
-    # save and return
-    post.save
-    
+    post = post_publishable.posts.create(post_params)
     # create the spread object
     spread(post) if auto_spread and post.valid?
-
-    post.reload
+    post
   end
 
   def query
@@ -48,16 +42,7 @@ class PostService
     }
   end
 
-  def new_postable
-    postable_klass.new(postable_params)
+  def is_postable_associated_to_an_existing_post?
+    post_params[:postable_type].constantize.find(post_params[:postable_id]).post.present? rescue false
   end
-
-  def new_post
-    Post.new(post_params)
-  end
-
-  def postable_klass
-    post_params[:postable_type].constantize
-  end
-
 end

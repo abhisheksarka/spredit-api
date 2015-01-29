@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :locations, only: [:create, :update, :index]
     resources :comments, only: [:index, :create]
     resources :posts, only: [:create, :index]
-    resources :post_photos, only: [:create]
+    resources :post_photos, only: [:create, :destroy]
+    resources :post_texts, only: [:create]
+    
     resources :spreads, only: [:create, :index] do
       collection do
         get :publishers

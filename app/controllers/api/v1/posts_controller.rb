@@ -7,7 +7,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def create
-    serializer_responder PostService.new(current_jwt_authable).create(post_params, postable_params) 
+    serializer_responder PostService.new(current_jwt_authable).create(post_params) 
   end
 
   def update
@@ -23,11 +23,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:postable_type, :content)
-  end
-
-  def postable_params
-    params.require(:postable).permit(:photo)
+    params.require(:post).permit(:postable_id, :postable_type, :content)
   end
   
 end

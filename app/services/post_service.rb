@@ -17,7 +17,7 @@ class PostService
       post.save
       # create the spread object
       spread(post) if auto_spread and post.valid?
-      post
+      post.reload
     else
       post.errors[:an_invalid_postable] << "cannot create a post object"
       post

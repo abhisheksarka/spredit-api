@@ -2,8 +2,6 @@ class PostSerializer < BaseSerializer
   attributes :id, 
              :postable_id,
              :postable_type,
-             :post_publishable_id,
-             :post_publishable_type,
              :created_at,
              :comments_count,
              :spreads_count,
@@ -11,10 +9,11 @@ class PostSerializer < BaseSerializer
              :total_propagation,
              :view_count,
              :contains_count,
-             :content
+             :content,
+             :display_address,
+             :address
 
   has_one :postable, 
-          :post_publishable, 
           :propagation
 
   def comments_count
@@ -35,5 +34,13 @@ class PostSerializer < BaseSerializer
 
   def view_count
     object.views.count
+  end
+
+  def display_address
+    object.propagation.location.display_address
+  end
+
+  def address
+    object.propagation.location.address
   end
 end

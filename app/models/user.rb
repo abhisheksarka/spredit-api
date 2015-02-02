@@ -8,4 +8,7 @@ class User < ActiveRecord::Base
   include SpreadPublishable
   include CommentPublishable
   include ViewPublishable
+
+  include Notification::Receivable
+  include Notification::Sendable
 end

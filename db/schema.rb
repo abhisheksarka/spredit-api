@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125175844) do
+ActiveRecord::Schema.define(version: 20150202064739) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.string   "grouping"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "commentable_id"
@@ -32,6 +39,18 @@ ActiveRecord::Schema.define(version: 20150125175844) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "conversations", force: true do |t|
+    t.string   "title"
+    t.integer  "conversable_id"
+    t.string   "conversable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "category_id"
+  end
+
+  add_index "conversations", ["category_id"], name: "index_conversations_on_category_id", using: :btree
+  add_index "conversations", ["conversable_id", "conversable_type"], name: "index_conversations_on_conversable_id_and_conversable_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|
     t.string   "value"
@@ -56,6 +75,22 @@ ActiveRecord::Schema.define(version: 20150125175844) do
   end
 
   add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "sendable_id"
+    t.string   "sendable_type"
+    t.integer  "receivable_id"
+    t.string   "receivable_type"
+    t.string   "action"
+    t.integer  "causable_id"
+    t.string   "causable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["causable_id", "causable_type"], name: "index_notifications_on_causable_id_and_causable_type", using: :btree
+  add_index "notifications", ["receivable_id", "receivable_type"], name: "index_notifications_on_receivable_id_and_receivable_type", using: :btree
+  add_index "notifications", ["sendable_id", "sendable_type"], name: "index_notifications_on_sendable_id_and_sendable_type", using: :btree
 
   create_table "post_photos", force: true do |t|
     t.string   "photo"

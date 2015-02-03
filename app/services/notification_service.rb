@@ -1,13 +1,34 @@
 class NotificationService
-  
-  def initialize()
+  attr_accessor :action,
+                :sendable,
+                :receivable,
+                :causable
+
+  def initialize(action)
+    @action = action
   end
+  
+  def from(sendable)
+    @sendable = sendable
+    self
+  end
+
+  def to(receivable)
+    @receivable = receivable
+    self
+  end
+
+  def for(causable)
+    @causable = causable
+    self
+  end
+
+  def notify
+    sendable.sent_notifications.create({
+      action: action,
+      receivable: receivable,
+      causable: causable
+    })
+  end
+
 end
-
-# rule for creation of Notifications
-# actor | receiver | action | 
-
-# sendable => one who causes the notification to be created
-# receivable => one who will receive the notification
-# action => 'commented' 'spreaded' 'contained' 'upvoted' 'propagated' etc
-# causable => associated resource for the notification, post, or a comment, user, etc 

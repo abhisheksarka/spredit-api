@@ -6,7 +6,7 @@ class CommentService
   end
 
   def create(comment_params)
-    comment = comment_publishable.create(comment_params)
+    comment = comment_publishable.comments.create(comment_params)
     if comment.valid? and comment.persisted?
       comment.reload
       create_notification(comment)

@@ -7,7 +7,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
   end
 
   def index
-    serializer_responder Comment.where(commentable_id: params[:commentable_id], commentable_type: params[:commentable_type]), nil, CommentSerializer
+    serializer_responder CommentService.new(current_jwt_authable).query(params), nil, CommentSerializer
   end
 
   private

@@ -14,6 +14,11 @@ class CommentService
     comment
   end
 
+  def query(query_params)
+    Comment.where(commentable_id: query_params[:commentable_id], commentable_type: query_params[:commentable_type])
+    .order(created_at: :desc)
+  end
+
   private
 
   def create_notification(comment)

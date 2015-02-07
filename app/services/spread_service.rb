@@ -7,7 +7,7 @@ class SpreadService
 
   def create(spreadable_params)
     s = user.spreads.create(spreadable_params)
-    if s.valid?
+    if s.valid? 
       update_propagation(s)
       s.reload
     end
@@ -55,7 +55,6 @@ class SpreadService
 
     # associate the location of the person who spread it with post through post's propagations
     locations.create(spread_publishable.location.attributes.symbolize_keys.slice(:latitude, :longitude, :address))
-
     # after the create get the last two locations to update the propagation distance
     last_two_locations = locations.reload.last(2)
     if(last_two_locations[1])

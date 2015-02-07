@@ -4,7 +4,6 @@ class Notification < ActiveRecord::Base
   belongs_to :sendable, polymorphic: true
   belongs_to :receivable, polymorphic: true
   belongs_to :causable, polymorphic: true
-  validates_with NotificationValidator
 
   class << self
     def action_types

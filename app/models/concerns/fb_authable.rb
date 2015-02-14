@@ -10,19 +10,18 @@ module FbAuthable
     end
 
     def find_or_create_entity(uid, access_token)
-      entity = find_by(:uid => uid)
-      if !entity.present?
-        me = koala_instance(access_token).get_object('me')
-        entity = create({
-          :provider => 'facebook',
-          :name => me['name'],
-          :email => me['email'],
-          :uid => me['id'],
-          :gender => me['gender'],
-          :profile_picture => "https://graph.facebook.com/#{me['id']}/picture"
-        })
-      end
-      entity.update({:oauth_token => access_token})
+      entity = find_or_create_by(uid: uid, provider: 'facebook')
+      me = koala_instance(access_token).get_object('me')
+      picture = "https://graph.facebook.com/#{me['id']}/picture"
+      entity.update({
+        name: me['name'],
+        email: me['email'],
+        uid: me['id'],
+        gender: me['gender'],
+        profile_picture: picture,
+        profile_picture_medium: "#{picture}?type=normal",
+        oauth_token: access_token
+      })
       entity
     end
 

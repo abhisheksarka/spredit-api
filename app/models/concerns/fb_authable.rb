@@ -19,7 +19,7 @@ module FbAuthable
         uid: me['id'],
         gender: me['gender'],
         profile_picture: picture,
-        profile_picture_medium: "#{picture}?type=normal",
+        profile_picture_medium: "#{picture}?height=100&width=100",
         oauth_token: access_token
       })
       entity

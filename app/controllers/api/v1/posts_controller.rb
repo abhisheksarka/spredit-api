@@ -11,7 +11,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def mine
-    serializer_responder [], nil, PostSerializer
+    serializer_responder PostService.new(current_jwt_authable).query.mine, nil, PostSerializer
   end
 
   private

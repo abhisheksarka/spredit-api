@@ -34,7 +34,7 @@ class PostService
   end
 
   def mine
-    @relation.where(id: post_publishable.id)
+    @relation.where(post_publishable_id: post_publishable.id).order(created_at: :desc)
   end
 
   private

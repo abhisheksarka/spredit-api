@@ -10,8 +10,8 @@ class PostQuery
       where(id: SpreadQuery.new.spreads.near_to(user).map(&:spreadable_id)).uniq
     end
 
-    def belongs_to(post_publishable_id)
-      eager_load.where(post_publishable_id: post_publishable_id).order(created_at: :desc)
+    def belongs_to(post_publishable)
+      eager_load.where(post_publishable_id: post_publishable.id).order(created_at: :desc)
     end
 
     private

@@ -11,7 +11,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def mine
-    serializer_responder PostQuery.new.posts.belongs_to(post_publishable.id), nil, PostSerializer
+    serializer_responder PostQuery.new.posts.belongs_to(current_jwt_authable), nil, PostSerializer
   end
 
   private

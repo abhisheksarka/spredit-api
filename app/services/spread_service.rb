@@ -14,33 +14,6 @@ class SpreadService
     s
   end
 
-  def query
-    nearby_locations = user.location.nearbys(Location.in_miles(user.location_configuration.radius)).map(&:id)
-    existing_spreadables = Spread.where(spread_publishable_id: user.id).pluck(:spreadable_id)
-    SpreadQuery.new
-      .spreads
-      .joins("INNER JOIN posts ON " + 
-        "(" +
-          "(spreads.spreadable_id = posts.id AND spreads.spreadable_type = 'Post' AND spreads.action = 'spread') AND " +
-          "(posts.post_publishable_id != " + user.id.to_s + " AND posts.post_publishable_type = 'User')" +
-        ")"
-      )
-      .joins("INNER JOIN propagations ON " +
-        "(" + 
-          "(posts.id = propagations.propagatable_id AND propagations.propagatable_type = 'Post')" +
-        ")"
-      )
-      .joins("INNER JOIN locations ON " +
-        "(" +
-          "(propagations.id = locations.locatable_id AND locations.locatable_type = 'Propagation')" +
-        ")"
-      )
-      .where.not(spreadable_id: existing_spreadables)
-      .where('locations.id' => nearby_locations)
-      .load_spreadable([:postable, :post_publishable, propagation: :locations])
-      .uniq
-  end
-
   private
 
   # update propgation for the entity that has been spread

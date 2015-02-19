@@ -3,7 +3,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   before_filter :load_resource, only: [:update]
   
   def index
-    serializer_responder PostService.new(current_jwt_authable).query.nearby, nil, PostSerializer
+    serializer_responder PostQuery.new.posts.near_to(current_jwt_authable), nil, PostSerializer
   end
 
   def create
@@ -11,7 +11,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def mine
-    serializer_responder PostService.new(current_jwt_authable).query.mine, nil, PostSerializer
+    serializer_responder PostQuery.new.posts.belongs_to(post_publishable.id), nil, PostSerializer
   end
 
   private

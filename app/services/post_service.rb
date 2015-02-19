@@ -24,19 +24,6 @@ class PostService
     end
   end
 
-  def query
-    @relation = Post.includes(:postable, :post_publishable, :views, :spreads, :contains, propagation: :locations)
-    self
-  end
-
-  def nearby
-    @relation.where(id: SpreadService.new(post_publishable).query.map(&:spreadable_id)).uniq
-  end
-
-  def mine
-    @relation.where(post_publishable_id: post_publishable.id).order(created_at: :desc)
-  end
-
   private
 
   def spread(post)

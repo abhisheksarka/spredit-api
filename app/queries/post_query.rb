@@ -6,8 +6,18 @@ class PostQuery
   end
 
   module Scopes
+    def near_to(user)
+      where(id: SpreadQuery.new.spreads.near_to(user).map(&:spreadable_id)).uniq
+    end
+
+    def belongs_to(post_publishable_id)
+      eager_load.where(post_publishable_id: post_publishable_id).order(created_at: :desc)
+    end
+
+    private
+
     def eager_load
-      Post.includes(:postable, :post_publishable, :views, :spreads, :contains, propagation: :locations)
+      includes(:postable, :post_publishable, :views, :spreads, :contains, propagation: :locations)
     end
   end
 end

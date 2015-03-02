@@ -28,7 +28,7 @@ gem "figaro"
 gem 'omniauth-facebook'
 gem "koala", "~> 1.10.0rc"
 gem 'geocoder'
-
+gem 'will_paginate', '~> 3.0.6'
 gem 'carrierwave'
 
 group :test, :development do

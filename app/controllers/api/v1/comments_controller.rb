@@ -7,7 +7,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
   end
 
   def index
-    serializer_responder CommentService.new(current_jwt_authable).query(params), nil, CommentSerializer
+    serializer_responder CommentService.new(current_jwt_authable).query(params).paginate(per_page: 1, page: params[:page]), nil, CommentSerializer
   end
 
   private

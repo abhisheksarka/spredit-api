@@ -14,9 +14,10 @@ class PostQuery
       eager_load.where(post_publishable_id: post_publishable.id).order(created_at: :desc)
     end
 
-    def with_pagination(page, per_page=1)
+    def with_pagination(page, per_page=15)
       paginate(page: page, per_page: per_page)
     end
+
     private
 
     def eager_load

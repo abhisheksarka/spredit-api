@@ -37,7 +37,4 @@ class SpreadService
     end
   end
 
-  def create_notification
-  end
-
 end

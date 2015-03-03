@@ -9,13 +9,16 @@ class Activity < ActiveRecord::Base
     def action_types
       {
         spread: {
-          label: 'spread'
+          label: 'spread',
+          value: 'spread'
         },
-        contain: {
-          label: 'contained'
+        contained: {
+          label: 'contained',
+          value: 'contained'
         },
         commented: {
-          label: 'commented'
+          label: 'commented',
+          value: 'commented'
         }
       }
     end

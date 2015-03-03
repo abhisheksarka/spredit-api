@@ -1,6 +1,17 @@
 class Spread < ActiveRecord::Base
   include ActiveModel::Validations
 
+  include Activity::Causable
+  activity_sender do | m |
+    m.spread_publishable 
+  end
+  activity_receiver do | m | 
+    m.spreadable.post_publishable if m.spreadable_type == 'Post' 
+  end
+  activity_action do | m |
+    m.action 
+  end
+
   belongs_to :spreadable, polymorphic: true
   belongs_to :spread_publishable, polymorphic: true
 
@@ -13,7 +24,7 @@ class Spread < ActiveRecord::Base
   def self.actions
     {
       spread: 'spread',
-      contain: 'contain'
+      contained: 'contained'
     }  
   end
 end

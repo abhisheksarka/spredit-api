@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   include CommentPublishable
   include ViewPublishable
 
-  include Notification::Receivable
-  include Notification::Sendable
+  include Activity::Receivable
+  include Activity::Sendable
 end

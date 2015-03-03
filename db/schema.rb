@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214070001) do
+ActiveRecord::Schema.define(version: 20150303082619) do
+
+  create_table "activities", force: true do |t|
+    t.integer  "sendable_id"
+    t.string   "sendable_type"
+    t.integer  "receivable_id"
+    t.string   "receivable_type"
+    t.string   "action"
+    t.integer  "causable_id"
+    t.string   "causable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["causable_id", "causable_type"], name: "index_activities_on_causable_id_and_causable_type", using: :btree
+  add_index "activities", ["receivable_id", "receivable_type"], name: "index_activities_on_receivable_id_and_receivable_type", using: :btree
+  add_index "activities", ["sendable_id", "sendable_type"], name: "index_activities_on_sendable_id_and_sendable_type", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -75,22 +91,6 @@ ActiveRecord::Schema.define(version: 20150214070001) do
   end
 
   add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
-
-  create_table "notifications", force: true do |t|
-    t.integer  "sendable_id"
-    t.string   "sendable_type"
-    t.integer  "receivable_id"
-    t.string   "receivable_type"
-    t.string   "action"
-    t.integer  "causable_id"
-    t.string   "causable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "notifications", ["causable_id", "causable_type"], name: "index_notifications_on_causable_id_and_causable_type", using: :btree
-  add_index "notifications", ["receivable_id", "receivable_type"], name: "index_notifications_on_receivable_id_and_receivable_type", using: :btree
-  add_index "notifications", ["sendable_id", "sendable_type"], name: "index_notifications_on_sendable_id_and_sendable_type", using: :btree
 
   create_table "post_photos", force: true do |t|
     t.string   "photo"

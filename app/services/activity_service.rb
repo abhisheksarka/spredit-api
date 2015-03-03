@@ -1,4 +1,4 @@
-class NotificationService
+class ActivityService
   attr_accessor :action,
                 :sendable,
                 :receivable,

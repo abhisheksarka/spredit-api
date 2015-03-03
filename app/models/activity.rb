@@ -1,4 +1,4 @@
-class Notification < ActiveRecord::Base
+class Activity < ActiveRecord::Base
   include ActiveModel::Validations
 
   belongs_to :sendable, polymorphic: true

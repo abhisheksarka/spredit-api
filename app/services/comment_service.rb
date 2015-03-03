@@ -17,7 +17,7 @@ class CommentService
   private
 
   def create_notification(comment)
-    NotificationService.new(Notification.action_types[:commented])
+    ActivityService.new(Notification.action_types[:commented])
     .from(comment_publishable)
     .to(comment.commentable.post_publishable)
     .for(comment)

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create, :destroy, :validate]
     resources :locations, only: [:create, :update, :index]
     resources :comments, only: [:index, :create]
+    resources :activities, only: [:index]
     resources :posts, only: [:create, :index] do
       collection do
         get :mine

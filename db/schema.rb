@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303082619) do
+ActiveRecord::Schema.define(version: 20150305200349) do
 
   create_table "activities", force: true do |t|
     t.integer  "sendable_id"
@@ -23,11 +23,14 @@ ActiveRecord::Schema.define(version: 20150303082619) do
     t.string   "causable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "targetable_id"
+    t.string   "targetable_type"
   end
 
   add_index "activities", ["causable_id", "causable_type"], name: "index_activities_on_causable_id_and_causable_type", using: :btree
   add_index "activities", ["receivable_id", "receivable_type"], name: "index_activities_on_receivable_id_and_receivable_type", using: :btree
   add_index "activities", ["sendable_id", "sendable_type"], name: "index_activities_on_sendable_id_and_sendable_type", using: :btree
+  add_index "activities", ["targetable_id", "targetable_type"], name: "index_activities_on_targetable_id_and_targetable_type", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"

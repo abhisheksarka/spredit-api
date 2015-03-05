@@ -8,6 +8,9 @@ class Spread < ActiveRecord::Base
   activity_receiver do | m | 
     m.spreadable.post_publishable if m.spreadable_type == 'Post' 
   end
+  activity_target do | m | 
+    m.spreadable 
+  end
   activity_action do | m |
     m.action 
   end

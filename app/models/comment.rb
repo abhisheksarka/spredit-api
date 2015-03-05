@@ -9,6 +9,9 @@ class Comment < ActiveRecord::Base
   activity_receiver do | m | 
     m.commentable.post_publishable if m.commentable_type == 'Post' 
   end
+  activity_target do | m | 
+    m.commentable 
+  end
   activity_action do 
     'commented' 
   end

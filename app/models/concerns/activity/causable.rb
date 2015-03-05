@@ -15,6 +15,10 @@ module Activity::Causable
       @activity_receiver_block = block
     end
 
+    def activity_target(&block)
+      @activity_target_block = block
+    end
+
     def activity_action(&block)
       @activity_action_block = block
     end
@@ -26,19 +30,28 @@ module Activity::Causable
     self.caused_activities.create({
       action: Activity.action_types[activity_action_block.call(self).to_sym][:value],
       receivable: activity_receiver_block.call(self),
+      targetable: activity_target_block.call(self),
       sendable: activity_sender_block.call(self)
     })
   end
 
   def activity_receiver_block
-    self.class.instance_variable_get(:@activity_receiver_block)
+    try_proc(self.class.instance_variable_get(:@activity_receiver_block))
   end
 
   def activity_sender_block
-    self.class.instance_variable_get(:@activity_sender_block)
+    try_proc(self.class.instance_variable_get(:@activity_sender_block))
+  end
+
+  def activity_target_block
+    try_proc(self.class.instance_variable_get(:@activity_target_block))
   end
 
   def activity_action_block
-    self.class.instance_variable_get(:@activity_action_block)
-  end  
+    try_proc(self.class.instance_variable_get(:@activity_action_block))
+  end 
+
+  def try_proc(assigned_block)
+    assigned_block || Proc.new { }
+  end 
 end

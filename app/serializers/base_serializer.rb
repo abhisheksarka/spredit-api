@@ -1,3 +1,7 @@
 class BaseSerializer < ActiveModel::Serializer
-  attributes :id
+  def errors
+    if object.is_a?(ActiveRecord::Base) and !object.valid?
+      object.errors
+    end
+  end
 end

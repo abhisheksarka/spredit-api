@@ -3,7 +3,7 @@ class Api::V1::SpreadsController < Api::V1::ApplicationController
   before_filter :load_resource, only: [:update, :destroy]
   
   def create
-    serializer_responder SpreadService.new(current_jwt_authable).create(spread_params) 
+    serializer_responder SpreadService.new(current_jwt_authable).create(spread_params), SpreadSerializer 
   end
 
   def publishers

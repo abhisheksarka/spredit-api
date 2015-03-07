@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
   include Spreadable
   include Commentable
   include Propagatable
+  include Activity::Targetable
+
   pr_location_through :post_publishable
 
   belongs_to :postable, polymorphic: true

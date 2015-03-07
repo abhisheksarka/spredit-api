@@ -11,7 +11,8 @@ class ActivityQuery
     end
 
     def eager_load
-      includes(:causable)
+      # here post_targetable is an association used for eager loading which has been set in initializers/activity
+      includes(post_targetable: [:postable, :post_publishable, :views, :spreads, :contains, { propagation: :locations }])
     end
 
     def with_pagination(page, per_page=15)

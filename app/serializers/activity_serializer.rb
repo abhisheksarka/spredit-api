@@ -2,10 +2,15 @@ class ActivitySerializer < BaseSerializer
   attributes :id, 
              :sendable_id,
              :sendable_type,
-             :causable_id,
-             :causable_type,
+             :targetable_id,
+             :targetable_type,
              :created_at,
-             :action
-  has_one :causable
-  has_one :target
+             :action,
+             :targetable
+
+  def targetable
+    if(targetable_type == 'Post')
+      PostSerializer.new(object.post_targetable)
+    end
+  end
 end

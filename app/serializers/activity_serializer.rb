@@ -10,7 +10,7 @@ class ActivitySerializer < BaseSerializer
 
   def targetable
     if(targetable_type == 'Post')
-      PostSerializer.new(object.post_targetable)
+      PostSerializer.new(object.post_targetable, root: false)
     end
   end
 end

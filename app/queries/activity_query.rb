@@ -7,12 +7,16 @@ class ActivityQuery
 
   module Scopes
     def belongs_to(sendable)
-      eager_load.where(sendable_id: sendable.id).order(created_at: :desc)
+      eager_load.where(sendable_id: sendable.id, sendable_type: sendable.class.to_s).order(created_at: :desc)
     end
 
     def eager_load
       # here post_targetable is an association used for eager loading which has been set in initializers/activity
       includes(post_targetable: [:postable, :post_publishable, :views, :spreads, :contains, { propagation: :locations }])
+    end
+
+    def notifications(receivable)
+      eager_load.where(receivable_id: receivable.id, receivable_type: receivable.class.to_s).order(created_at: :desc)
     end
 
     def with_pagination(page, per_page=15)

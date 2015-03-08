@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create, :destroy, :validate]
     resources :locations, only: [:create, :update, :index]
     resources :comments, only: [:index, :create]
-    resources :activities, only: [:index]
+    resources :activities, only: [:index] do
+      collection do
+        get :notifications
+      end
+    end
     resources :posts, only: [:create, :index] do
       collection do
         get :mine
@@ -13,7 +17,6 @@ Rails.application.routes.draw do
     end
     resources :post_photos, only: [:create, :destroy]
     resources :post_texts, only: [:create]
-    
     resources :spreads, only: [:create, :index] do
       collection do
         get :publishers

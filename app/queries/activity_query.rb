@@ -16,7 +16,11 @@ class ActivityQuery
     end
 
     def notifications(receivable)
-      eager_load.where(receivable_id: receivable.id, receivable_type: receivable.class.to_s).order(created_at: :desc)
+      eager_load
+      .includes(user_sendable: :location)
+      .where(receivable_id: receivable.id, receivable_type: receivable.class.to_s)
+      .where('(sendable_id != ? AND sendable_type != ?) OR (action != ?)', receivable.id, receivable.class.to_s, 'contained')
+      .order(created_at: :desc)
     end
 
     def with_pagination(page, per_page=15)

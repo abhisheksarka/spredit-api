@@ -8,6 +8,7 @@ class Activity < ActiveRecord::Base
 
   # for eager loading purposes
   belongs_to :post_targetable, -> { includes(:targeted_activities).where('activities.targetable_type' => 'Post') }, foreign_key: :targetable_id, class_name: :Post
+  belongs_to :user_sendable, -> { includes(:sent_activities).where('activities.sendable_type' => 'User') }, foreign_key: :sendable_id, class_name: :User
 
   class << self
     def action_types

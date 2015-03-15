@@ -1,6 +1,6 @@
 class Api::V1::PostsController < Api::V1::ApplicationController
   before_filter :authenticate_token
-  before_filter :load_resource, only: [:update]
+  before_filter :load_resource, only: [:update, :show]
   
   def index
     serializer_responder PostQuery.new.posts.near_to(current_jwt_authable), nil, PostSerializer
@@ -8,6 +8,10 @@ class Api::V1::PostsController < Api::V1::ApplicationController
 
   def create
     serializer_responder PostService.new(current_jwt_authable).create(post_params) 
+  end
+
+  def show
+    serializer_responder @post, PostSerializer
   end
 
   def mine

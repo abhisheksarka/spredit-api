@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         get :notifications
       end
     end
-    resources :posts, only: [:create, :index] do
+    resources :posts, only: [:create, :index, :show] do
       collection do
         get :mine
       end

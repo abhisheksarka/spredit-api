@@ -37,10 +37,10 @@ class PostSerializer < BaseSerializer
   end
 
   def display_address
-    object.propagation.location.display_address
+    object.propagation.location.display_address rescue nil
   end
 
   def address
-    object.propagation.location.address
+    object.propagation.location.address rescue nil
   end
 end

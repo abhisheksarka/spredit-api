@@ -88,9 +88,9 @@ module JwtAuthHelper
   end
 
   def set_jw_token_and_jwt_authable
-    self.current_jw_token = JwToken.find_by(:value => token_value_sent)
+    self.current_jw_token = JwToken.find_by(value: token_value_sent)
     if current_jw_token_valid?
-      self.current_jwt_authable = JwToken.find_by(:jw_tokenable_id => decoded_jwt_authable_hash[:id]).jw_tokenable
+      self.current_jwt_authable = JwToken.find_by(jw_tokenable_id: decoded_jwt_authable_hash[:id]).jw_tokenable
     else
       self.current_jwt_authable = nil
     end

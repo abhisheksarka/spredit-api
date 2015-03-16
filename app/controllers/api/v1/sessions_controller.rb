@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < Api::V1::ApplicationController
-  before_filter :authenticate_token, :only => [:destroy, :validate] 
+  before_filter :authenticate_token, only: [:destroy] 
 
   def create
     serializer_responder jwt_sign_in(User.login_via_fb(log_in_params)), SessionSerializer
@@ -9,8 +9,11 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
     serializer_responder jwt_sign_out
   end
 
-  def validate
-    serializer_responder({ is_token_valid: current_jw_token_valid? })
+  def current
+    token = JwToken.find_by(value: token_value_sent)
+    token = { } if token.expired? rescue { }
+    
+    serializer_responder token, SessionSerializer
   end
 
   private

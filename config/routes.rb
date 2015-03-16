@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   api_routes = lambda do
     resource :init, only: [:show]
-    resources :sessions, only: [:create, :destroy, :validate]
+    resources :sessions, only: [:create, :destroy] do
+      collection do
+        get :current
+      end
+    end
     resources :locations, only: [:create, :update, :index]
     resources :comments, only: [:index, :create]
     resources :activities, only: [:index] do

@@ -8,4 +8,10 @@ class Api::V1::ActivitiesController < Api::V1::ApplicationController
   def notifications
     serializer_responder ActivityQuery.new.activities.notifications(current_jwt_authable).with_pagination(params[:page]), nil, NotificationSerializer
   end  
+
+  def notifications_unread_count
+  	serializer_responder({
+  		count: ActivityQuery.new.activities.notifications(current_jwt_authable).count
+  	})
+  end
 end

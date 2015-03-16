@@ -10,7 +10,7 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
   end
 
   def validate
-    serializer_responder current_jw_token_valid?
+    serializer_responder({ is_token_valid: current_jw_token_valid? })
   end
 
   private

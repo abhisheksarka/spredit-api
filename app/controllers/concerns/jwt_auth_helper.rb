@@ -41,6 +41,7 @@ module JwtAuthHelper
     current_jw_token.update({
       :expires_at => Time.now
     })
+    cookies.delete(:jwToken)
     current_jwt_authable
   end
 
@@ -83,7 +84,7 @@ module JwtAuthHelper
   end
 
   def token_value_sent
-    request.headers['Jw-Token']
+    cookies[:jwToken]
   end
 
   def set_jw_token_and_jwt_authable

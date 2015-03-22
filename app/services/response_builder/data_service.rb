@@ -15,12 +15,12 @@ class ResponseBuilder::DataService < ResponseBuilder::BaseService
 	end
 
 	def set_collection_data
-		return if not is_collection?
+		return if !is_collection?
 		@data = JSON.parse(ActiveModel::ArraySerializer.new(resource, each_serializer: config[:each_serializer], root: false).to_json)
 	end
 
 	def set_object_data
-		return if not is_active_record_object?
+		return if(!is_active_record_object? && !is_hash_object?)
 		r = config[:serializer] ? config[:serializer].new(resource, root: false) : resource 
 		@data = JSON.parse(r.to_json)
 	end

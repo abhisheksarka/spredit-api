@@ -13,6 +13,10 @@ class ResponseBuilder::BaseService
 		@resource.kind_of?(ActiveRecord::Base)
 	end
 
+	def is_hash_object?
+		@resource.kind_of?(Hash)
+	end
+
 	def resource_has_errors?
 		is_active_record_object? and !@resource.valid?
 	end

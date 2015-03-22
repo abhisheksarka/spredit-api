@@ -1,6 +1,7 @@
 class ResponseBuilder::BaseService
 	attr_accessor :resource,
 								:config
+								
 	def initialize(resource, config={})
 		@resource = resource
 		@config = config

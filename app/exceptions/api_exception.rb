@@ -11,7 +11,7 @@ class ApiException < StandardError
   end
 
   class << self
-  	def error_constants
+    def error_constants
   		{
   			INTERNAL_SERVER_ERROR: {
   				code: 1100,
@@ -27,9 +27,13 @@ class ApiException < StandardError
   	end
 
   	private
-
+    
   	def t(code)
   		I18n.t("api_response.code_#{code}")
   	end
+  end
+
+  self.error_constants.each do | key, value |
+    define_singleton_method(key.downcase) { value }
   end
 end

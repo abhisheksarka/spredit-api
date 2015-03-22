@@ -13,7 +13,7 @@ module JwtAuthHelper
         :expires_at => Time.now + JwToken.timeout
       })
     else  
-      head :unauthorized
+      raise ApiException.new(ApiException.session_expired)
     end
   end
 

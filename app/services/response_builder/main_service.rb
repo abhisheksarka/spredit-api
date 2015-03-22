@@ -12,8 +12,9 @@ class ResponseBuilder::MainService
 
 	def set_response
 		@response = {
+			api: true,
 			code: ResponseBuilder::CodeService.new(resource, config).code,
-			data: ResponseBuilder::DataService.new(resource, config).data,
+			body: ResponseBuilder::DataService.new(resource, config).data,
 			messages: ResponseBuilder::MessagesService.new(resource, config).messages
 		}
 	end

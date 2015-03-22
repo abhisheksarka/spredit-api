@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  api_response:
+    code_1000: "API response successful."
+    code_1100: "Internal server error."
+    code_1200: "Your session has expired."
+    code_1300: "" # validation error, set manual error messages

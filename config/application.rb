@@ -23,5 +23,6 @@ module MaskdApi
     config.autoload_paths += %W(#{Rails.root}/app/services)
     config.autoload_paths += %W(#{Rails.root}/app/queries)
     config.autoload_paths += %W(#{Rails.root}/app/validators)
+    config.autoload_paths += %W(#{Rails.root}/app/exceptions)
   end
 end

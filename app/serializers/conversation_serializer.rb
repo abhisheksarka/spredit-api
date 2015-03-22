@@ -1,4 +1,4 @@
-class ConversationSerializer < BaseSerializer
+class ConversationSerializer < ApplicationSerializer
   attributes :id, 
              :title, 
              :category_id, 

@@ -10,8 +10,8 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
   end
 
   def current
-    token = token_value_sent.present? ? JwToken.find_by(value: token_value_sent) : JwToken.new
-    serializer_responder token, SessionSerializer
+    token = JwToken.find_by(value: token_value_sent)
+    serializer_responder((token.present? and !token.expired?) ? token : JwToken.new, SessionSerializer)
   end
 
   private

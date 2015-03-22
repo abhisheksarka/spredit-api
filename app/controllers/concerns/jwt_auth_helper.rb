@@ -12,7 +12,7 @@ module JwtAuthHelper
       current_jw_token.update({
         :expires_at => Time.now + JwToken.timeout
       })
-    else
+    else  
       head :unauthorized
     end
   end

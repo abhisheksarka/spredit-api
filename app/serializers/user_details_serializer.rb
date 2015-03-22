@@ -1,4 +1,4 @@
-class UserDetailsSerializer < BaseSerializer
+class UserDetailsSerializer < ApplicationSerializer
   attributes :id, 
              :provider, 
              :name,

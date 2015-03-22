@@ -1,4 +1,4 @@
-class CommentSerializer < BaseSerializer
+class CommentSerializer < ApplicationSerializer
   attributes :id, 
              :commentable_id,
              :commentable_type,

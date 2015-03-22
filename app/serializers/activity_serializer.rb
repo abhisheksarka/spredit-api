@@ -1,4 +1,4 @@
-class ActivitySerializer < BaseSerializer
+class ActivitySerializer < ApplicationSerializer
   attributes :id, 
              :sendable_id,
              :sendable_type,

@@ -1,4 +1,4 @@
-class PostSerializer < BaseSerializer
+class PostSerializer < ApplicationSerializer
   attributes :id, 
              :postable_id,
              :postable_type,

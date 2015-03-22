@@ -6,10 +6,10 @@ class Api::V1::ApplicationController < ApplicationController
   end
 
   def serializer_responder(resource, serializer=nil, each_serializer=nil)
-    response = { :json => resource }
-    response.merge!({:serializer => serializer}) if serializer
-    response.merge!({:each_serializer => each_serializer}) if each_serializer
-    render response
+    render ResponseBuilder::MainService.new(resource, {
+      serializer: serializer,
+      each_serializer: each_serializer
+    })
   end
 
 end

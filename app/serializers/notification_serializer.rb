@@ -1,4 +1,4 @@
-class NotificationSerializer < BaseSerializer
+class NotificationSerializer < ApplicationSerializer
   attributes :id, 
              :receivable_id,
              :receivable_type,

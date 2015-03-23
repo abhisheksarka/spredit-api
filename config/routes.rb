@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :activities, only: [:index] do
       collection do
         get :notifications
+        get :unread_notifications_count
       end
     end
     resources :posts, only: [:create, :index, :show] do

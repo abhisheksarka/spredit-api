@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       collection do
         get :notifications
         get :unread_notifications_count
+        put :mark_all_as_read
       end
     end
     resources :posts, only: [:create, :index, :show] do

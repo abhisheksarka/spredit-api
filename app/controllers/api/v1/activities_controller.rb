@@ -2,16 +2,22 @@ class Api::V1::ActivitiesController < Api::V1::ApplicationController
   before_filter :authenticate_token
 
   def index
-    serializer_responder ActivityQuery.new.activities.belongs_to(current_jwt_authable).with_pagination(params[:page]), nil, ActivitySerializer
+    activities = ActivityQuery.new.activities.belongs_to(current_jwt_authable).with_pagination(params[:page])
+    serializer_responder(activities, nil, ActivitySerializer)
   end
   
   def notifications
-    serializer_responder ActivityQuery.new.activities.notifications(current_jwt_authable).with_pagination(params[:page]), nil, NotificationSerializer
+    notifications = ActivityQuery.new.activities.notifications(current_jwt_authable).with_pagination(params[:page])
+    serializer_responder(notifications, nil, NotificationSerializer)
   end  
 
+  def mark_all_as_read
+    unread_notifications = ActivityQuery.new.activities.unread_notifications(current_jwt_authable)
+    serializer_responder(unread_notifications.update_all(has_receiver_read: true))
+  end
+
   def unread_notifications_count
-  	serializer_responder({
-  		count: ActivityQuery.new.activities.notifications(current_jwt_authable).count
-  	})
+    count = { count: ActivityQuery.new.activities.unread_notifications(current_jwt_authable).count }
+  	serializer_responder(count)
   end
 end

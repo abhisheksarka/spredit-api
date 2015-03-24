@@ -23,6 +23,10 @@ class ActivityQuery
       .order(created_at: :desc)
     end
 
+    def unread_notifications(receivable)
+      notifications(receivable).where(has_receiver_read: false)
+    end
+
     def with_pagination(page, per_page=15)
       paginate(page: page, per_page: per_page)
     end

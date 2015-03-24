@@ -13,6 +13,6 @@ class UserDetailsSerializer < ApplicationSerializer
 
   def unread_notifications_count
     # TODO move this query call out of here
-    ActivityQuery.new.activities.notifications(object).count
+    ActivityQuery.new.activities.unread_notifications(object).count
   end
 end

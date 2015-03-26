@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
 
   include Activity::Receivable
   include Activity::Sendable
+  acts_as_voter
 end

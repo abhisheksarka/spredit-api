@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     resources :locations, only: [:create, :update, :index]
     resources :comments, only: [:index, :create]
+    resources :votes, only: [:create, :destroy]
     resources :activities, only: [:index] do
       collection do
         get :notifications

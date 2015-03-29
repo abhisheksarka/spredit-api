@@ -3,7 +3,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
   before_filter :load_resource, only: [:update]
 
   def create
-    serializer_responder CommentService.new(current_jwt_authable).create(comment_params)
+    serializer_responder CommentService.new(current_jwt_authable).create(comment_params), CommentSerializer
   end
 
   def index

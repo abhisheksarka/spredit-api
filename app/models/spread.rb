@@ -23,11 +23,22 @@ class Spread < ActiveRecord::Base
   validates :spreadable_type, presence: true
   validates :spread_publishable_type, presence: true
   validates_with SpreadValidator, on: :create
+  after_save :update_counter_cache
   
   def self.actions
     {
       spread: 'spread',
       contained: 'contained'
     }  
+  end
+
+  private
+  
+  def update_counter_cache
+    if(action == 'spread')
+      spreadable.update(spreads_count: spreadable.spreads.length)
+    else
+      spreadable.update(contains_count: spreadable.contains.length)
+    end
   end
 end

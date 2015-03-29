@@ -7,7 +7,7 @@ class PostSerializer < ApplicationSerializer
              :spreads_count,
              :contains_count,
              :total_propagation,
-             :view_count,
+             :views_count,
              :contains_count,
              :content,
              :display_address,
@@ -16,24 +16,8 @@ class PostSerializer < ApplicationSerializer
   has_one :postable, 
           :propagation
 
-  def comments_count
-    object.comments.count
-  end
-
-  def spreads_count
-    object.spreads.count
-  end
-
-  def contains_count
-    object.contains.count
-  end
-
   def total_propagation
     object.propagation.total.round(1) rescue 0
-  end
-
-  def view_count
-    object.views.count
   end
 
   def display_address

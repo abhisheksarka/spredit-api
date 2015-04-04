@@ -27,7 +27,9 @@ class SpreadService
     locations = propagation.locations
 
     # associate the location of the person who spread it with post through post's propagations
-    locations.create(spread_publishable.location.attributes.symbolize_keys.slice(:latitude, :longitude, :address))
+    l = locations.new(spread_publishable.location.attributes.symbolize_keys.slice(:latitude, :longitude, :address))
+    l.save(validate: false) # we do not want reverse_geocode to run since we already have all the details
+    
     # after the create get the last two locations to update the propagation distance
     last_two_locations = locations.reload.last(2)
     if(last_two_locations[1])

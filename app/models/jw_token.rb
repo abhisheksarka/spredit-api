@@ -7,11 +7,11 @@ class JwToken < ActiveRecord::Base
 
   class << self
     def timeout
-      Rails.application.config.jwt.timeout rescue default_timeout
+      Rails.application.config.jwt[:timeout] rescue default_timeout
     end
 
     def default_timeout
-      30.minutes
+      1.day
     end
   end
 end

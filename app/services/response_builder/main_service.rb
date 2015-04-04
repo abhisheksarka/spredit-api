@@ -1,12 +1,14 @@
 class ResponseBuilder::MainService
 	attr_accessor :resource,
 								:config,
-								:response
+								:response,
+								:params
 								
-	def initialize(resource, config={})
+	def initialize(resource, config={}, params)
 		@resource = resource
 		@config = config
 		@response = { }
+		@params = params || { }
 		set_response
 	end
 
@@ -15,7 +17,8 @@ class ResponseBuilder::MainService
 			api: true,
 			code: ResponseBuilder::CodeService.new(resource, config).code,
 			body: ResponseBuilder::DataService.new(resource, config).data,
-			messages: ResponseBuilder::MessagesService.new(resource, config).messages
+			messages: ResponseBuilder::MessagesService.new(resource, config).messages,
+			meta: params[:meta]
 		}
 	end
 

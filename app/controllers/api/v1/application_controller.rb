@@ -13,7 +13,7 @@ class Api::V1::ApplicationController < ApplicationController
     render json: ResponseBuilder::MainService.new(resource, {
       serializer: serializer,
       each_serializer: each_serializer
-    }).response
+    }, params).response
   end
 
   private

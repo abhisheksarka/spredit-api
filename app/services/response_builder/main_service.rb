@@ -4,11 +4,11 @@ class ResponseBuilder::MainService
 								:response,
 								:params
 								
-	def initialize(resource, config={}, params)
+	def initialize(resource, config={}, params={})
 		@resource = resource
 		@config = config
 		@response = { }
-		@params = params || { }
+		@params = params
 		set_response
 	end
 

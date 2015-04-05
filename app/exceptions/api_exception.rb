@@ -22,7 +22,12 @@ class ApiException < StandardError
   				code: 1200,
   				message: t(1200),
           key: :session_expired
-  			}
+  			},
+        POST_INVALID: {
+          code: 1400,
+          message: t(1400),
+          key: :post_invalid  
+        }
   		}
   	end
 

@@ -1,4 +1,8 @@
 class Api::V1::PostsController < Api::V1::ApplicationController
+  rescue_from ::ActionController::ParameterMissing do | e | 
+    handle_api_exception(ApiException.new(ApiException.post_invalid))
+  end
+
   before_filter :authenticate_token
   before_filter :load_resource, only: [:update, :show]
   

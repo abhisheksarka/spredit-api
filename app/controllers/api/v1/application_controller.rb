@@ -16,9 +16,7 @@ class Api::V1::ApplicationController < ApplicationController
     }, params).response
   end
 
-  private
-
   def handle_api_exception(e)
-    render json: ResponseBuilder::MainService.new(e).response
+    render json: ResponseBuilder::MainService.new(e, { }, params).response
   end
 end

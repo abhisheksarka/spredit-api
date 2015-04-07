@@ -25,4 +25,4 @@ en:
     code_1100: "Internal server error."
     code_1200: "Your session has expired."
     code_1300: "" # validation error, set manual error messages
-    code_1400: "Failed to publish the post."
+    code_1400: "The post seems to be empty."

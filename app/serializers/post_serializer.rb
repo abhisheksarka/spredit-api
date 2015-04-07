@@ -10,6 +10,7 @@ class PostSerializer < ApplicationSerializer
              :views_count,
              :contains_count,
              :content,
+             :title,
              :display_address,
              :address
 

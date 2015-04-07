@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329152358) do
+ActiveRecord::Schema.define(version: 20150407160254) do
 
   create_table "activities", force: true do |t|
     t.integer  "sendable_id"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150329152358) do
     t.integer  "contains_count",        default: 0
     t.integer  "comments_count",        default: 0
     t.integer  "views_count",           default: 0
+    t.text     "title"
   end
 
   add_index "posts", ["post_publishable_id", "post_publishable_type"], name: "index_posts_on_post_publishable_id_and_post_publishable_type", using: :btree

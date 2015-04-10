@@ -7,7 +7,7 @@ module LocationConfigurable
   end
 
   def lc_set_default_location_configuration
-    self.location_configuration = Configuration::Location.new({ radius: 15 })
+    self.location_configuration = Configuration::Location.new({ radius: 30 })
   end
 
   module ClassMethods

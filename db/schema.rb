@@ -33,13 +33,6 @@ ActiveRecord::Schema.define(version: 20150407160254) do
   add_index "activities", ["sendable_id", "sendable_type"], name: "index_activities_on_sendable_id_and_sendable_type", using: :btree
   add_index "activities", ["targetable_id", "targetable_type"], name: "index_activities_on_targetable_id_and_targetable_type", using: :btree
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
-    t.string   "grouping"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "comments", force: true do |t|
     t.integer  "commentable_id"
     t.string   "commentable_type"
@@ -59,18 +52,6 @@ ActiveRecord::Schema.define(version: 20150407160254) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "conversations", force: true do |t|
-    t.string   "title"
-    t.integer  "conversable_id"
-    t.string   "conversable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "category_id"
-  end
-
-  add_index "conversations", ["category_id"], name: "index_conversations_on_category_id", using: :btree
-  add_index "conversations", ["conversable_id", "conversable_type"], name: "index_conversations_on_conversable_id_and_conversable_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|
     t.string   "value"

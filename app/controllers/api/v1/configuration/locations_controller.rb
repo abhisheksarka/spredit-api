@@ -10,11 +10,11 @@ class Api::V1::Configuration::LocationsController < Api::V1::ApplicationControll
   private
 
   def load_resource
-    @configuration_location = ::Configuration::Location.find_by(params[:id])
+    @configuration_location = current_jwt_authable.location_configuration
   end
 
   def configuration_location_params
-    params.permit(:radius, :configurable_location_id, :configurable_location_type)
+    params.permit(:radius)
   end
   
 end

@@ -15,7 +15,7 @@ class SpreadQuery
       .join_propagation
       .join_locations
       .where
-      .not(spreadable_id: existing_spreadables(user))
+      .not('spreads.spreadable_id' => existing_spreadables(user))
       .where('locations.id' => nearby_locations(user).map(&:id))
       .includes(spreadable: [:postable, :post_publishable, propagation: :locations])
       .uniq

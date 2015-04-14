@@ -29,6 +29,8 @@ gem 'omniauth-facebook'
 gem "koala", "~> 1.10.0rc"
 gem 'geocoder'
 gem 'will_paginate', '~> 3.0.6'
+gem 'fog'
+gem 'mini_magick'
 gem 'carrierwave'
 gem 'acts_as_votable', '~> 0.10.0'
 

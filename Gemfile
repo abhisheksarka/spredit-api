@@ -33,6 +33,7 @@ gem 'fog'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'capistrano', '~> 3.4.0'
 
 group :test, :development do
   # Debug gem

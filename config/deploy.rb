@@ -36,6 +36,10 @@ set :pty, true
 # Default value for keep_releases is 5
 set :keep_releases, 2
 
+task :other do
+  run 'migrate', roles: :db
+end
+
 namespace :deploy do
 
   after :restart, :clear_cache do

@@ -19,7 +19,7 @@ set :deploy_via, :copy
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-set :log_level, :debug
+set :log_level, :debug  
 
 # Default value for :pty is false
 set :pty, true
@@ -31,7 +31,7 @@ set :pty, true
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { path: "/usr/local/bin:$PATH" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 2

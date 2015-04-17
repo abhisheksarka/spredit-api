@@ -11,7 +11,7 @@ set :user, 'ubuntu'
 set :rails_env, 'production'
 role :web, '52.74.135.97'
 role :app, '52.74.135.97'
-role :db, 'spredit-production-db.cbpa26dszixt.ap-southeast-1.rds.amazonaws.com', :primary => true
+role :db, '52.74.135.97', :primary => true
 
 # role-based syntax
 # ==================

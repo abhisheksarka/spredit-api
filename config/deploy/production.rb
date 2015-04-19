@@ -9,9 +9,9 @@
 
 set :user, 'ubuntu'
 set :rails_env, 'production'
-role :web, '52.74.135.97'
-role :app, '52.74.135.97'
-role :db, '52.74.135.97', :primary => true
+role :web, '52.74.152.223'
+role :app, '52.74.152.223'
+role :db, '52.74.152.223', :primary => true
 
 # role-based syntax
 # ==================

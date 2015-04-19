@@ -3,6 +3,10 @@ class Api::V1::PostPhotosController < Api::V1::ApplicationController
   before_filter :load_resource, only: [:destroy]
 
   def create
+    # TDOO front job, not backend, remove it ASAP
+    params[:meta] = {
+      errorFlash: true
+    }
     serializer_responder PostPhoto.create(post_photo_params) 
   end
 

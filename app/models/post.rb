@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   include Commentable
   include Propagatable
   include Activity::Targetable
+  include IdEncryptable
 
   pr_location_through :post_publishable
 

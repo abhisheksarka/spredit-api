@@ -17,6 +17,14 @@ class NotificationSerializer < ApplicationSerializer
     end
   end
 
+  def targetable_id
+    if(targetable_type == 'Post')
+      object.post_targetable.encrypted_id
+    else
+      object.targetable_id
+    end
+  end
+
   # return sendable only if it is a comment action
   # we don't want to expose the location of any user
   def sendable

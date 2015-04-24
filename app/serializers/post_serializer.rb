@@ -12,13 +12,18 @@ class PostSerializer < ApplicationSerializer
              :content,
              :title,
              :display_address,
-             :address
+             :address, 
+             :encrypted_id
 
   has_one :postable, 
           :propagation
 
   def total_propagation
     object.propagation.total.round(1) rescue 0
+  end
+
+  def encrypted_id
+    object.encrypted_id
   end
 
   def display_address

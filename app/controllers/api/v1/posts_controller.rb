@@ -25,7 +25,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   private
 
   def load_resource
-    @post = Post.find(params[:id])
+    @post = Post.find_by_encrypted_id(params[:id])
   end
 
   def post_params

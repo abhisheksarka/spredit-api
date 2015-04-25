@@ -18,6 +18,10 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     serializer_responder @post, PostSerializer
   end
 
+  def categories
+    serializer_responder Post.categories.to_h
+  end
+
   def mine
     serializer_responder PostQuery.new.posts.belongs_to(current_jwt_authable).with_pagination(params[:page]), nil, PostSerializer
   end

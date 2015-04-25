@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:create, :index, :show] do
       collection do
         get :mine
+        get :categories
       end
     end
     resources :post_photos, only: [:create, :destroy]

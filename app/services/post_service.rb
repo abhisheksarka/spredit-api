@@ -12,7 +12,6 @@ class PostService
     @post_params = post_params
     set_default_postable 
     post = post_publishable.posts.new(post_params)
-    
     if valid_postable?
       post.save
       # create the spread object

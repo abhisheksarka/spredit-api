@@ -14,24 +14,28 @@ class Post < ActiveRecord::Base
   validates :title, length: { maximum: 120 }
 
   def self.categories
-    types = {
-      standard: {
-        label: 'Standard'
+    [   
+      {
+        label: 'Standard',
+        value: 'standard'
       },
-      event: {
-        label: 'Event'
+      {
+        label: 'Event',
+        value: 'event'
       },
-      news: {
-        label: 'News'
+      {
+        label: 'News',
+        value: 'news'
       },
-      question: {
-        label: 'Question'
+      {
+        label: 'Question',
+        value: 'question'
       },
-      nsfw: {
-        label: 'NSFW'
+      {
+        label: 'NSFW',
+        value: 'nsfw'
       }
-    }
-    OpenStruct.new(types)
+    ]
   end
-  validates :category, inclusion: { in: self.categories.to_h.stringify_keys.keys, message: "%{value} is not a valid post category." }, presence: true
+  validates :category, inclusion: { in: self.categories.map { | c | c[:value] }, message: "%{value} is not a valid post category." }, presence: true
 end

@@ -25,6 +25,10 @@ class ResponseBuilder::BaseService
 		@resource.kind_of?(ActiveRecord::Relation)
 	end
 
+	def is_plain_array?
+		@resource.kind_of?(Array)
+	end
+
 	def is_exception?
 		@resource.kind_of?(StandardError)
 	end

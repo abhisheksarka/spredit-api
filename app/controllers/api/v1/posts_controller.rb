@@ -19,7 +19,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def categories
-    serializer_responder Post.categories.to_h
+    serializer_responder Post.categories
   end
 
   def mine

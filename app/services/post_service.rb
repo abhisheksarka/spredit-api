@@ -12,13 +12,12 @@ class PostService
     @post_params = post_params
     set_default_postable 
     post = post_publishable.posts.new(post_params)
-    if valid_postable?
-      post.save
-      # create the spread object
-      spread(post) if auto_spread and post.valid?
+    post.save
+
+    if post.valid?
+      spread(post) if auto_spread
       post.reload
     else
-      post.errors[:an_invalid_postable] << "cannot create a post object"
       post
     end
   end
@@ -40,7 +39,7 @@ class PostService
   # default postable is always text 
   # create this automatically if a valid postable has not been found
   def set_default_postable
-    if valid_postable?
+    if valid_postable? or no_content_and_title?
       return nil
     end
     default = PostText.create
@@ -66,5 +65,9 @@ class PostService
   # which is already created but is not associated to any post
   def valid_postable?
     postable.present? and !is_postable_associated_to_an_existing_post?
+  end
+
+  def no_content_and_title?
+    post_params[:title].blank? and post_params[:content].blank?
   end
 end

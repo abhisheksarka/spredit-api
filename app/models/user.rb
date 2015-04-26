@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
                     foreign_key: :locatable_id
 
   include LocationConfigurable
+  include PostCategoryConfigurable
 
   include PostPublishable
   include SpreadPublishable

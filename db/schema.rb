@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425130315) do
+ActiveRecord::Schema.define(version: 20150426083813) do
 
   create_table "activities", force: true do |t|
     t.integer  "sendable_id"
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 20150425130315) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "configuration_post_categories", force: true do |t|
+    t.string   "values"
+    t.integer  "configurable_post_category_id"
+    t.string   "configurable_post_category_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "configuration_post_categories", ["configurable_post_category_id", "configurable_post_category_type"], name: "index_configuration_post_categories_id_and_type", using: :btree
 
   create_table "jw_tokens", force: true do |t|
     t.string   "value"

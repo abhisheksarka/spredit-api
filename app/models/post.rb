@@ -37,5 +37,10 @@ class Post < ActiveRecord::Base
       }
     ]
   end
+
+  def self.default_initial_categories
+    self.categories.delete_if { | c | c[:value] == 'nsfw' } 
+  end
+
   validates :category, inclusion: { in: self.categories.map { | c | c[:value] }, message: "%{value} is not a valid post category." }, presence: true
 end

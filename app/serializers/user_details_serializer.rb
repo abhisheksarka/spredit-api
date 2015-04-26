@@ -7,7 +7,9 @@ class UserDetailsSerializer < ApplicationSerializer
              :gender,
              :profile_picture,
              :profile_picture_medium,
-             :unread_notifications_count
+             :unread_notifications_count,
+             :post_category_configuration
+              
   has_one :location
   has_one :location_configuration
 

@@ -6,8 +6,10 @@ class PostQuery
   end
 
   module Scopes
-    def near_to(user)
-      where(id: SpreadQuery.new.spreads.near_to(user).map(&:spreadable_id)).order('spreads_count DESC').uniq
+    def near_to(user, types)
+      where(id: SpreadQuery.new.spreads.near_to(user).map(&:spreadable_id))
+      .where(category: types)
+      .order('spreads_count DESC').uniq
     end
 
     def belongs_to(post_publishable)

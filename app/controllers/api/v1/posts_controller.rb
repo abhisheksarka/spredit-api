@@ -3,11 +3,12 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     handle_api_exception(ApiException.new(ApiException.post_invalid))
   end
 
-  before_filter :authenticate_token
+  before_filter :authenticate_token, except: [:categories] 
   before_filter :load_resource, only: [:update, :show]
+  before_filter :set_post_categories, only: [:index]
   
   def index
-    serializer_responder PostQuery.new.posts.near_to(current_jwt_authable), nil, PostSerializer
+    serializer_responder PostQuery.new.posts.near_to(current_jwt_authable, @post_types), nil, PostSerializer
   end
 
   def create
@@ -36,4 +37,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     params.require(:post).permit(:postable_id, :postable_type, :content, :title, :category)
   end
   
+  def set_post_categories
+    @post_types = current_jwt_authable.post_category_configuration.values.split(',')
+  end
 end

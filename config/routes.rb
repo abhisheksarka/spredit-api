@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :views, only: [:create]
     namespace :configuration do
       resources :locations, only: [:update]
+      resources :post_categories, only: [:update]
     end
   end
   

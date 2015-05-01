@@ -34,7 +34,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:postable_id, :postable_type, :content, :title, :category)
+    params.require(:post).permit(:postable_id, :postable_type, :content, :category)
   end
   
   def set_post_categories

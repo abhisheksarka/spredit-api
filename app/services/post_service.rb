@@ -39,7 +39,7 @@ class PostService
   # default postable is always text 
   # create this automatically if a valid postable has not been found
   def set_default_postable
-    if valid_postable? or no_content_and_title?
+    if valid_postable? or no_content?
       return nil
     end
     default = PostText.create
@@ -67,7 +67,7 @@ class PostService
     postable.present? and !is_postable_associated_to_an_existing_post?
   end
 
-  def no_content_and_title?
-    post_params[:title].blank? and post_params[:content].blank?
+  def no_content?
+    post_params[:content].blank?
   end
 end

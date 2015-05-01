@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   belongs_to :postable, polymorphic: true
   belongs_to :post_publishable, polymorphic: true
   validates_with PostValidator, on: :create
-  validates :title, length: { maximum: 120 }
+  validates :content, length: { maximum: 250 }
 
   def self.categories
     [   

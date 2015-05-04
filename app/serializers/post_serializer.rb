@@ -12,7 +12,8 @@ class PostSerializer < ApplicationSerializer
              :content,
              :display_address,
              :address, 
-             :encrypted_id
+             :encrypted_id,
+             :life
 
   has_one :postable, 
           :propagation

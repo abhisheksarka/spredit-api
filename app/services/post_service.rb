@@ -25,7 +25,7 @@ class PostService
   private
 
   def spread(post)
-    SpreadService.new(post_publishable).create(spread_params(post))
+    SpreadService.new(post_publishable, {no_life_update: true}).create(spread_params(post))
   end
 
   def spread_params(post)

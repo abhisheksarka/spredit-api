@@ -1,27 +1,41 @@
 class SpreadService
   attr_accessor :user
 
-  def initialize(user)
+  def initialize(user, config={})
     @user = user
+    @config = config
   end
 
   def create(spreadable_params)
-    s = user.spreads.create(spreadable_params)
-    if s.valid? 
-      update_propagation(s)
-      s.reload
+    @spread = user.spreads.create(spreadable_params)
+    if @spread.valid? 
+      update_propagation
+      update_life
+      @spread.reload
     end
-    s
+    @spread
   end
 
   private
 
+  def update_life
+    return if @config[:no_life_update]
+
+    l = spreadable.life
+    if @spread.action == 'spread'
+      l = l + 1
+    else
+      l = l - 1
+      l = 0 if(l < 0) 
+    end
+    spreadable.update(life: l)
+  end
+
   # update propgation for the entity that has been spread
   # based on the entity spreading it
 
-  def update_propagation(spread)
-    spreadable = spread.spreadable
-    spread_publishable = spread.spread_publishable
+  def update_propagation
+    return if @config[:no_propagation_update]
 
     propagation = spreadable.propagation
     locations = propagation.locations
@@ -39,4 +53,11 @@ class SpreadService
     end
   end
 
+  def spread_publishable
+    @spread_publishable ||= @spread.spread_publishable
+  end
+
+  def spreadable
+    @spreadable ||= @spread.spreadable
+  end
 end

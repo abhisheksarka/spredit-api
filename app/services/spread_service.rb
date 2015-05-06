@@ -24,6 +24,7 @@ class SpreadService
     l = spreadable.life
     if @spread.action == 'spread'
       l = l + 1
+      l = 5 if(l > 5)
     else
       l = l - 1
       l = 0 if(l < 0) 

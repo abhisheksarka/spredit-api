@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       collection do
         get :mine
         get :categories
+        get :with_new_notifications
       end
     end
     resources :post_photos, only: [:create, :destroy]

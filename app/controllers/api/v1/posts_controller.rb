@@ -24,7 +24,18 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def mine
-    serializer_responder PostQuery.new.posts.belongs_to(current_jwt_authable).with_pagination(params[:page]), nil, PostSerializer
+    serializer_responder PostQuery.new
+    .posts
+    .belongs_to(current_jwt_authable)
+    .with_pagination(params[:page]), nil, PostSerializer
+  end
+
+  def with_new_notifications
+    serializer_responder PostQuery.new
+    .posts
+    .belongs_to(current_jwt_authable)
+    .with_notifications
+    .with_pagination(params[:page]), nil, PostWithActivitiesSerializer
   end
 
   private

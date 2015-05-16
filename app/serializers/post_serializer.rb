@@ -13,7 +13,10 @@ class PostSerializer < ApplicationSerializer
              :display_address,
              :address, 
              :encrypted_id,
-             :life
+             :life,
+             :new_comments_count,
+             :new_spreads_count,
+             :new_contains_count
 
   has_one :postable, 
           :propagation
@@ -32,5 +35,17 @@ class PostSerializer < ApplicationSerializer
 
   def address
     object.propagation.location.address rescue nil
+  end
+
+  def new_comments_count
+    0 
+  end
+
+  def new_spreads_count
+    0 
+  end
+
+  def new_contains_count
+    0 
   end
 end

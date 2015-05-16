@@ -17,6 +17,10 @@ class PostQuery
       eager_load.where(post_publishable_id: post_publishable.id).order(created_at: :desc)
     end
 
+    def with_notifications
+      includes(:unread_targeted_activities).where('unread_targeted_activities_count > 0')
+    end
+
     def with_pagination(page, per_page=15)
       paginate(page: page, per_page: per_page)
     end

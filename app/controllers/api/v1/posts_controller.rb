@@ -35,7 +35,8 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     .posts
     .belongs_to(current_jwt_authable)
     .with_notifications
-    .with_pagination(params[:page]), nil, PostWithActivitiesSerializer
+    .with_pagination(params[:page], 50), nil, PostWithActivitiesSerializer
+    # TODO fix this, per page should not be 50. This is a hack to make all notifications getting marked at once
   end
 
   private

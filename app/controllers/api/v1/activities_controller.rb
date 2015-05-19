@@ -12,8 +12,8 @@ class Api::V1::ActivitiesController < Api::V1::ApplicationController
   end  
 
   def mark_all_as_read
-    unread_notifications = ActivityQuery.new.activities.unread_notifications(current_jwt_authable)
-    serializer_responder(unread_notifications.update_all(has_receiver_read: true))
+    ActivityQuery.new.activities.unread_notifications(current_jwt_authable).map { | n | n.update(has_receiver_read: true) }
+    serializer_responder({ status: true })
   end
 
   def unread_notifications_count

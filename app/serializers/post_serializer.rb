@@ -16,7 +16,8 @@ class PostSerializer < ApplicationSerializer
              :life,
              :new_comments_count,
              :new_spreads_count,
-             :new_contains_count
+             :new_contains_count,
+             :poster_gender
 
   has_one :postable, 
           :propagation
@@ -35,6 +36,10 @@ class PostSerializer < ApplicationSerializer
 
   def address
     object.propagation.location.address rescue nil
+  end
+
+  def poster_gender
+    object.post_publishable.gender
   end
 
   def new_comments_count

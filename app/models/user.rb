@@ -17,4 +17,10 @@ class User < ActiveRecord::Base
   include Activity::Receivable
   include Activity::Sendable
   acts_as_voter
+
+  validates :email, presence: true
+  validates :name, presence: true
+  validates :provider, presence: true
+  validates :uid, presence: true
+  validates :gender, presence: true
 end

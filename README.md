@@ -1,4 +1,4 @@
-# Spredit(API, Ruby on Rails app)
+# Spredit(API, Ruby on Rails)
 
 This is location based information spreading(like a virus) fully functional bank end Rails API application. You can find the accompanying front end SPA repo @ https://github.com/abhisheksarka/spredit-app
 
